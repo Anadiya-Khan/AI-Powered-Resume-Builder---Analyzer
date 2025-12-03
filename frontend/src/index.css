@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Print styles: force A4 size and ensure printable area uses full page */
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Elements with .printable will be sized to A4 for printing */
+  .printable {
+    width: 210mm !important;
+    max-width: 210mm !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  /* Make printable container use full printable height and remove visual chrome */
+  .printable {
+    min-height: calc(297mm - 20mm) !important; /* A4 height minus top/bottom margins */
+    padding: 10mm !important; /* inner padding within page margins */
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+  }
+
+  /* Avoid page breaks inside the resume container */
+  /* Allow content to flow across pages when needed so long resumes paginate correctly */
+  .printable, .printable * {
+    page-break-inside: auto !important;
+  }
+}
+
+
