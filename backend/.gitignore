@@ -37,7 +37,6 @@ Thumbs.db
 coverage/
 
 # Lock files (optional)
-package-lock.json
 yarn.lock
 
 # Uploaded files (if any)
