@@ -25,11 +25,11 @@ export default function Login({ onClose }) {
     e.preventDefault()
     try {
       const res = await api.post("/users/login", { email, password });
-      console.log(res)
+      // console.log(res)
       setUser(res.data.data.user); 
       setIsLogin(true)
       localStorage.setItem("user", JSON.stringify(res.data.data.user));
-      console.log(res.data.data.accessToken)
+      // console.log(res.data.data.accessToken)
       localStorage.setItem("token", res.data.data.accessToken);
       navigate("/dashboard");
       const success = res.data?.data?.message 
