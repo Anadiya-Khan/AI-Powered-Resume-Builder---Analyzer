@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
+dotenv.config()
 import path from "path"
 import dbConnect from "./src/config/db.js"
 import helmet from "helmet"
@@ -11,16 +12,13 @@ import aiRouter from "./src/routes/ai.routes.js"
 import uploadFile from "./src/routes/upload.routes.js"
 import atsRouter from "./src/routes/ats.routes.js"
 
-dotenv.config()
-
 const app = express()
 const port = process.env.PORT || 5000
 
 app.use(helmet())
 
-
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }));
 
