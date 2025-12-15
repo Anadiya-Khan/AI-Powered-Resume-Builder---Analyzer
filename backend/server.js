@@ -1,7 +1,6 @@
+import "./src/utils/env.js"
 import express from "express"
 import cors from "cors"
-import dotenv from "dotenv"
-dotenv.config()
 import path from "path"
 import dbConnect from "./src/config/db.js"
 import helmet from "helmet"
@@ -11,7 +10,7 @@ import resumeRouter from "./src/routes/resume.routes.js"
 import aiRouter from "./src/routes/ai.routes.js"
 import uploadFile from "./src/routes/upload.routes.js"
 import atsRouter from "./src/routes/ats.routes.js"
-console.log("Gemini API Loaded:", process.env.GEMINI_API_KEY);
+console.log("Gemini API Loaded:", process.env.GROQ_API_KEY);
 
 
 const app = express()
