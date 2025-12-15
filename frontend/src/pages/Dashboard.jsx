@@ -14,8 +14,8 @@ useEffect(() => {
   const getresumes = async () => {
     try {
       const res = await getAllResume();
-      if(res?.data?.data){
-        setSavedResumes(res.data.data);
+      if(res?.data?.resumes){
+        setSavedResumes(res?.data?.resumes);
       }
     } catch (err) {
       console.log("Error fetching resumes:", err);
@@ -25,11 +25,18 @@ useEffect(() => {
 }, []);
 
   // Delete resume
-  const handleDelete = async(id) => {
-   await deleteResume(id)
-   toast.success("Resume Deleted Successfully")
-   setSavedResumes(savedResumes.filter(r=> r._id !== id))
-  };
+  const handleDelete = async (id) => {
+  try {
+    await deleteResume(id);
+    toast.success("Resume Deleted Successfully");
+    setSavedResumes(prev =>
+      prev.filter(r => r._id !== id)
+    );
+  } catch (error) {
+    // error already toasted in service
+  }
+};
+
 
   // Edit resume
   const handleEdit = (resume) => {

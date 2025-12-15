@@ -3,7 +3,7 @@ import api from "./api";
 
 export const getAllResume = async()=>{
     try {
-        const res = await api.get("/resumes/")
+        const res = await api.get("/resumes")
         // console.log(res)
         return res
     } catch (error) {
@@ -36,7 +36,7 @@ export const updateResume = async(id,resumeData) =>{
 
 export const deleteResume = async(id) =>{
     try {
-        const res = await api.delete(`resumes/delete/${id}`)
+        const res = await api.delete(`/resumes/delete/${id}`)
         return res
     } catch (error) {
          console.log("Error while deleting the resume",error)
@@ -47,7 +47,7 @@ export const deleteResume = async(id) =>{
 export const aiGenerateContent = async(data)=>{
     try {
         const res = await api.post("/ai/generate",data)
-        console.log(res)
+        // console.log(res)
         return res
     } catch (error) {
         console.log(error)
