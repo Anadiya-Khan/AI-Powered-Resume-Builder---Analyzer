@@ -15,7 +15,7 @@ export const authMiddleware = async (req, res, next) => {
       const decoded = jwt.verify(accessToken, secret);
       req.user = decoded;
       return next(); // token valid → continue
-    } catch (err) {
+    } catch (err) { 
       if (err.name !== "TokenExpiredError") {
         return res.status(401).json({ message: "Invalid token" });
       }

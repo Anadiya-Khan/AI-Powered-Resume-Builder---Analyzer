@@ -98,7 +98,8 @@ Project Link: ${pr.link || ""}
     return res.status(200).json({ success: true, enhancements });
   } catch (error) {
     console.error("AI enhancement error:", error);
-    return res.status(500).json({ success: false, message: error.message || "AI enhancement failed" });
+    const status = error?.status || 500;
+    return res.status(status).json({ success: false, message: error.message || "AI enhancement failed" });
   }
 };
 
