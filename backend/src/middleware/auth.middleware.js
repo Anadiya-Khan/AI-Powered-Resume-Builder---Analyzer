@@ -13,7 +13,7 @@ export const authMiddleware = async (req, res, next) => {
     try {
       const secret = process.env.JWT_SECRET || process.env.SECRET_KEY;
       const decoded = jwt.verify(accessToken, secret);
-      req.user = decoded;
+      req.user = decoded; 
       return next(); // token valid → continue
     } catch (err) { 
       if (err.name !== "TokenExpiredError") {
@@ -45,7 +45,7 @@ export const authMiddleware = async (req, res, next) => {
         { expiresIn: "15m" }
       );
 
-      // Send new access token in header (like many production apps do)
+      // Send new access token in header
       res.setHeader("x-access-token", newAccessToken);
 
       req.user = decodedRefresh; // attach user to request

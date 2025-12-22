@@ -1,5 +1,3 @@
-// controllers/pdfController.js
-
 import { uploadOnCloudinary } from "../config/cloudinary.js";
 import fs from "fs";
 

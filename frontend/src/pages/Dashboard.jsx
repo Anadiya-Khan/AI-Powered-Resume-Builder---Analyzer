@@ -43,7 +43,7 @@ useEffect(() => {
     navigate("/create-resume",{state:resume}); // Pass resume data to edit page.//state is just a data   
   };
 
-  return (
+  return ( 
     <div className="min-h-screen flex flex-col bg-gray-50">
 
   <div className="flex-1 p-8 max-w-6xl mx-auto">

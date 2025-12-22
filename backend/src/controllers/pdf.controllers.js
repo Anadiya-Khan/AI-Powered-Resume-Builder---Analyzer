@@ -1,11 +1,7 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 import puppeteer from "puppeteer";
-
-// Generate a simple HTML from resume data. This is a pragmatic server-side renderer
-// that approximates the frontend template. If you need pixel-perfect rendering
-// use Puppeteer to open the frontend printable route instead.
+// build html page
 const buildHtml = (data) => {
   const escape = (s) => (s ? String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;") : "");
 
@@ -118,64 +114,64 @@ const buildHtml = (data) => {
 
   return html;
 };
+// using pupeteer to convert the html page into PDF
+// export const generatePdfFromData = async (req, res) => {
+//   try {
+//     const data = req.body || {};
 
-export const generatePdfFromData = async (req, res) => {
-  try {
-    const data = req.body || {};
+//     const html = buildHtml(data);
 
-    const html = buildHtml(data);
+//     // Generate PDF buffer (no disk writes)
+//     const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+//     const page = await browser.newPage();
+//     await page.setContent(html, { waitUntil: 'networkidle0' });
+//     await page.emulateMediaType('print');
 
-    // Generate PDF buffer (no disk writes)
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-    const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle0' });
-    await page.emulateMediaType('print');
+//     const pdfBuffer = await page.pdf({
+//       format: 'A4',
+//       printBackground: true,
+//       displayHeaderFooter: false,
+//       margin: { top: '6mm', bottom: '6mm', left: '6mm', right: '6mm' },
+//     });
 
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      displayHeaderFooter: false,
-      margin: { top: '6mm', bottom: '6mm', left: '6mm', right: '6mm' },
-    });
+//     await browser.close();
 
-    await browser.close();
+//     const filename = `resume-${Date.now()}.pdf`;
 
-    const filename = `resume-${Date.now()}.pdf`;
+//     res.setHeader('Content-Type', 'application/pdf');
+//     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+//     res.setHeader('Content-Length', pdfBuffer.length);
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-    res.setHeader('Content-Length', pdfBuffer.length);
-
-    return res.send(pdfBuffer);
-  } catch (err) {
-    console.error('PDF generation failed', err);
-    return res.status(500).json({ success: false, message: 'PDF generation failed', error: err.message });
-  }
-};
+//     return res.send(pdfBuffer);
+//   } catch (err) {
+//     console.error('PDF generation failed', err);
+//     return res.status(500).json({ success: false, message: 'PDF generation failed', error: err.message });
+//   }
+// };
 
 // Stream a generated PDF to the client with headers that force download
-export const downloadPdfFile = async (req, res) => {
-  try {
-    const { filename } = req.params;
-    if (!filename) return res.status(400).json({ success: false, message: 'Filename required' });
+// export const downloadPdfFile = async (req, res) => {
+//   try {
+//     const { filename } = req.params;
+//     if (!filename) return res.status(400).json({ success: false, message: 'Filename required' });
 
-    const filePath = path.join(process.cwd(), 'public', 'downloads', filename);
-    if (!fs.existsSync(filePath)) {
-      return res.status(404).json({ success: false, message: 'File not found' });
-    }
+//     const filePath = path.join(process.cwd(), 'public', 'downloads', filename);
+//     if (!fs.existsSync(filePath)) {
+//       return res.status(404).json({ success: false, message: 'File not found' });
+//     }
 
-    // Use res.download which sets appropriate headers for Content-Disposition
-    return res.download(filePath, filename, (err) => {
-      if (err) {
-        console.error('Error sending file:', err);
-        if (!res.headersSent) res.status(500).end();
-      }
-    });
-  } catch (err) {
-    console.error('Download error', err);
-    return res.status(500).json({ success: false, message: 'Download failed', error: err.message });
-  }
-};
+//     // Use res.download which sets appropriate headers for Content-Disposition
+//     return res.download(filePath, filename, (err) => {
+//       if (err) {
+//         console.error('Error sending file:', err);
+//         if (!res.headersSent) res.status(500).end();
+//       }
+//     });
+//   } catch (err) {
+//     console.error('Download error', err);
+//     return res.status(500).json({ success: false, message: 'Download failed', error: err.message });
+//   }
+// };
 
 // Generate PDF and stream directly (no disk storage) — forces browser download
 export const generatePdfStream = async (req, res) => {

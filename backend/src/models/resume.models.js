@@ -52,7 +52,7 @@ const resumeSchema = mongoose.Schema({
             link : String
         },
     ],
-    aiGeneratedContent : String,
+    aiGeneratedContent : String, 
 },{
     timestamps : true
 })

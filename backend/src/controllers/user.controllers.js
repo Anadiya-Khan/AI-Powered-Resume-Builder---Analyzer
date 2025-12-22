@@ -20,6 +20,11 @@ export const userRegister = async (req, res) => {
         .status(400)
         .json({ success: false, message: "All fields are required" });
 
+      const checkEmail = await User.findOne({email})
+      if(checkEmail){
+      return  res.status(400).json({success:false,message : "User Already Registered"})
+      }
+
     if (!isValidPassword(password)) {
       return res.status(400).json({
         success: false,
@@ -85,18 +90,18 @@ export const userLogin = async (req, res) => {
       { expiresIn: "7d" }
     );
 
-    // Save refresh token in DB (optional but recommended)
+    // Save refresh token in DB 
     user.refreshToken = refreshToken;
     await user.save();
 
-    // -------- SET REFRESH TOKEN IN COOKIE --------
    res.cookie("refreshToken", refreshToken, {
-  httpOnly: true,
-  secure: false, 
-  sameSite: "lax",  // allow localhost:5173 to send cookie
-  path: "/",
-  maxAge: 7 * 24 * 60 * 60 * 1000,
-});
+    httpOnly: true,
+    secure: false, 
+    sameSite: "lax",  // allow localhost:5173 to send cookie
+    path: "/",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
     return res.status(200).json({
       success: true,
       data: {
@@ -132,7 +137,7 @@ export const forgotPassword = async (req, res) => {
       .digest("hex");
 
     user.resetPasswordToken = hashedToken;
-    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+    user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // valid for 10min
     await user.save();
 
     const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;

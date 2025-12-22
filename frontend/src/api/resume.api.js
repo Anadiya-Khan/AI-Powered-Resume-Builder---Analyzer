@@ -55,20 +55,20 @@ export const aiGenerateContent = async(data)=>{
     }
 }
 
-export const exportResumePdf = async(data) => {
-    try {
-        const res = await api.post('/resumes/pdf', data)
-        // make returned url absolute so frontend opens backend-hosted PDF
-        if (res?.data?.url && typeof res.data.url === 'string' && res.data.url.startsWith('/')) {
-            const base = api.defaults.baseURL.replace(/\/api\/?$/, '');
-            res.data.url = base + res.data.url;
-        }
-        return res
-    } catch (error) {
-        console.log('PDF export error', error)
-        toast.error(error.response?.data?.message || 'Error exporting PDF')
-    }
-}
+// export const exportResumePdf = async(data) => {
+//     try {
+//         const res = await api.post('/resumes/pdf', data)
+//         // make returned url absolute so frontend opens backend-hosted PDF
+//         if (res?.data?.url && typeof res.data.url === 'string' && res.data.url.startsWith('/')) {
+//             const base = api.defaults.baseURL.replace(/\/api\/?$/, '');
+//             res.data.url = base + res.data.url;
+//         }
+//         return res
+//     } catch (error) {
+//         console.log('PDF export error', error)
+//         toast.error(error.response?.data?.message || 'Error exporting PDF')
+//     }
+// }
 
 export const exportResumePdfStream = async (data) => {
     try {

@@ -52,31 +52,14 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-
-         {/* <Route
-            path="/ats-result"
-            element={
-              <ProtectedRoute>
-                <ATSResult />
-              </ProtectedRoute>
-            }
-          /> */}
-
-             {/* <Route
-                path="/preview-resume"
-                element={<ProtectedRoute>
-                  <PreviewResume />
-                  </ProtectedRoute>}
-              /> */}
-
-
         </Route>
 
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-
-        <Route path="*" element={<Navigate to="/" replace />} />
+      {/* // if user goes to unknown path redirect them to home 
+          // replace clean redirect without back navigation  */}
+        <Route path="*" element={<Navigate to="/" replace />} /> 
       </Routes>
       <Toaster position="top-center"/>
       </div>

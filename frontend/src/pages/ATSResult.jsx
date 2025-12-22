@@ -8,7 +8,7 @@ const ATSResult = () => {
   useEffect(() => {
     const fetchATSResult = async () => {
       const resumeUrl = sessionStorage.getItem("uploadedResumeUrl");
-      console.log(resumeUrl)
+      // console.log(resumeUrl)
       if (!resumeUrl) {
         alert("No uploaded resume found!");
         setLoading(false);
@@ -17,7 +17,7 @@ const ATSResult = () => {
 
       try {
         const res = await api.post("/ats/score", { resumeUrl }); // send Cloudinary URL to backend
-        console.log(res)
+        // console.log(res)
         setResult(res.data.data);
       } catch (err) {
         console.error(err);

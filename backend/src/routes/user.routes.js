@@ -9,9 +9,4 @@ router.post("/forgot-password", forgotPassword);
 router.post("/reset-password/:token", resetPassword);
 router.post("/refresh-token",refreshAccessToken)
 
-// router.get("/profile", authMiddleware, (req, res) => {
-//   res.json({ message: "Protected data", user: req.user });
-// });
-
-
 export default router

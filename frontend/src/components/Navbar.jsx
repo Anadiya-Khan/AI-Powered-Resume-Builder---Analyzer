@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <nav className="w-full shadow-sm py-4 px-6 md:px-10 flex items-center justify-between bg-slate-300">
       
-      <h1 className="text-2xl font-bold text-gray-800" onClick={()=>navigate("/")}>AI Resume Builder</h1>
+      <h1 className="text-2xl font-bold text-gray-800" onClick={()=>navigate("/")}>Resume Builder Pro</h1>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-8">

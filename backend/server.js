@@ -10,8 +10,6 @@ import resumeRouter from "./src/routes/resume.routes.js"
 import aiRouter from "./src/routes/ai.routes.js"
 import uploadFile from "./src/routes/upload.routes.js"
 import atsRouter from "./src/routes/ats.routes.js"
-console.log("Gemini API Loaded:", process.env.GROQ_API_KEY);
-
 
 const app = express()
 const port = process.env.PORT || 5000

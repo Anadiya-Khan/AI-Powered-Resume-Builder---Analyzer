@@ -5,11 +5,11 @@ import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-export default function Login({ onClose }) {
+export default function Login() {
 
   const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\-]).{8,}$/;
 
-  const {user,setUser} = useContext(authContext);
+  const {setUser} = useContext(authContext);
 
   const navigate = useNavigate();
 

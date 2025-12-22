@@ -9,7 +9,7 @@ export const createResume = async(req,res)=>{
         const resume  = await Resume.create({
             userId,fullName , email , phone , address,links,education,skills,experience,projects
         })
-        await resume.save()
+        // await resume.save()
         res.status(201).json({
             success : true,
             data : {

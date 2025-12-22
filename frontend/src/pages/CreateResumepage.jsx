@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import { useLocation, useNavigate } from "react-router-dom"; // for navigation
-import { aiGenerateContent, createResume, updateResume, exportResumePdf, exportResumePdfStream } from "../api/resume.api";
+import { createResume, updateResume, exportResumePdfStream } from "../api/resume.api";
 import toast from "react-hot-toast";
 import TemplateOne from "../components/templates/Templatesone";
 import TemplateTwo from "../components/templates/Templatestwo";
@@ -141,30 +141,30 @@ export default function CreateResumepage() {
      navigate("/dashboard")
   };
 
-  const aiGenerate = async () => {
-  try {
-    const data = form;
+//   const aiGenerate = async () => {
+//   try {
+//     const data = form;
 
-    // 1️⃣ CALL THE BACKEND
-    const res = await aiGenerateContent(data);
+//     // 1️⃣ CALL THE BACKEND
+//     const res = await aiGenerateContent(data);
 
-    // 2️⃣ CHECK RESPONSE
-    if (!res?.data?.resume) {
-      toast.error("AI could not generate the resume.");
-      return;
-    }
+//     // 2️⃣ CHECK RESPONSE
+//     if (!res?.data?.resume) {
+//       toast.error("AI could not generate the resume.");
+//       return;
+//     }
 
-    // 3️⃣ TAKE AI TEXT FROM BACKEND
-    const aiText = res.data.resume.aiGeneratedContent;
+//     // 3️⃣ TAKE AI TEXT FROM BACKEND
+//     const aiText = res.data.resume.aiGeneratedContent;
 
-    // 4️⃣ SHOW IT IN PREVIEW
-    setAiContent(aiText);
+//     // 4️⃣ SHOW IT IN PREVIEW
+//     setAiContent(aiText);
 
-    toast.success("AI Resume Generated Successfully!");
-  } catch (error) {
-    console.log(error);
-  }
-};
+//     toast.success("AI Resume Generated Successfully!");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 
   return (

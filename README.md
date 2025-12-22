@@ -1,4 +1,4 @@
-# Resume Builder Pro
+# Resume Builder pro
 
 A full-stack MERN application that enables users to create, manage, and optimize resumes with AI-powered enhancements and ATS (Applicant Tracking System) scoring. Built with modern web technologies, this platform provides resume templates, PDF generation, and intelligent resume analysis.
 
